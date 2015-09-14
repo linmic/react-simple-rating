@@ -1,0 +1,68 @@
+/*
+ * heavily inspired by https://css-tricks.com/star-ratings/
+ */
+
+.rating {
+  display: inline-block;
+  position: relative;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.current-rating {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+
+  > i {
+    color: #000;
+    font-style: normal;
+  }
+}
+
+.rating.display-only {
+  > i {
+    color: #ccc;
+  }
+
+  > .current-rating {
+    direction: ltr;
+    opacity: 1;
+  }
+}
+
+.rating > i {
+  display: inline-block;
+  position: relative;
+  font-style: normal;
+  color: #ccc;
+}
+
+.rating:not(.display-only) > i {
+  cursor: pointer;
+}
+
+.rating:not(.display-only) {
+  > i:hover,
+  > i.active,
+  > i:hover ~ i,
+  > i.active ~ i {
+    color: transparent;  
+  }
+}
+
+.rating:not(.display-only) {
+  > i:hover:before,
+  > i.active:before,
+  > i:hover ~ i::before,
+  > i.active ~ i::before {
+     content: "\2605";
+     position: absolute;
+     left: 0;
+     color: #000;
+  }
+}

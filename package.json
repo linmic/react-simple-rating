@@ -1,0 +1,40 @@
+{
+  "name": "react-rating",
+  "version": "1.0.0",
+  "description": "a pure and clean react component for your rating function",
+  "main": "dist/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.24",
+    "babel-eslint": "^4.1.1",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.18.0",
+    "eslint": "^1.4.1",
+    "eslint-plugin-react": "^3.3.2",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "fbjs-scripts": "^0.2.0",
+    "postcss": "^5.0.5",
+    "postcss-cli": "^2.1.0",
+    "postcss-loader": "^0.6.0",
+    "postcss-nested": "^1.0.0",
+    "react": "^0.13.3",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.12.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -w -d",
+    "build-js": "babel index.jsx --stage 0 --out-dir=dist --modules umd --module-id Rating",
+    "build-css": "postcss --use postcss-nested -o ./dist/rating.css rating.css && echo 'rating.css -> dist/rating.css'",
+    "build": "npm run build-js && npm run build-css"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "rating",
+    "ui"
+  ],
+  "author": "Linmic",
+  "license": "MIT"
+}
