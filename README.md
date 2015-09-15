@@ -4,12 +4,12 @@ this is a really small and highly-extensible react-componenet made for your rati
 # Usage
 
 ```bash
-var Rating = require('react-rating');
+var Rating = require('react-simple-rating');
 ```
 or
 
 ```bash
-import Rating from 'react-rating';
+import Rating from 'react-simple-rating';
 ```
 
 # Examples
@@ -28,6 +28,11 @@ npm run dev && open ./example/index.html
 #### functional
 ```jsx
 <Rating displayOnly={false} onSubmit={this.handleClick} />
+```
+
+#### arbitrary maxRating
+```jsx
+<Rating displayOnly={false} maxRating={7} onSubmit={this.handleClick} />
 ```
 
 #### custom unicode symbol

@@ -93,6 +93,12 @@
 	      _react2['default'].createElement(
 	        'h1',
 	        null,
+	        'arbitrary maxRating'
+	      ),
+	      _react2['default'].createElement(_distIndex2['default'], { displayOnly: false, maxRating: 7, onSubmit: this.handleClick }),
+	      _react2['default'].createElement(
+	        'h1',
+	        null,
 	        'this demonstrates how to use your custom unicode symbols'
 	      ),
 	      _react2['default'].createElement(_distIndex2['default'], { rating: 3.43, displayOnly: true, ratingSymbol: '❤' }),
