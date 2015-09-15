@@ -30,10 +30,12 @@ npm run dev && open ./example/index.html
 <Rating displayOnly={false} onSubmit={this.handleClick} />
 ```
 
-#### arbitrary maxRating
+#### arbitrary maxRating (but don't go too far)
 ```jsx
 <Rating displayOnly={false} maxRating={7} onSubmit={this.handleClick} />
 ```
+
+however, if you go with too many symbols and lead to a line wrap, since it is based on RTL direction, it may not work as you expected (say 100 symbols)
 
 #### custom unicode symbol
 ```jsx
