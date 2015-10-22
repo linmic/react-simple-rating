@@ -56,8 +56,8 @@ export default class Rating extends Component {
     });
 
     const currentRatingWidthPercentage =
-      (this.state.rating && this.props.displayOnly) ?
-      this.state.rating / this.props.maxRating * 100 : 0;
+      (this.props.rating && this.props.displayOnly) ?
+      this.props.rating / this.props.maxRating * 100 : 0;
     const ratingClassName = this.props.displayOnly ? 'rating display-only' : 'rating';
     const clickEventHandler = this.props.displayOnly ? null : this.handleClick.bind(this);
 
