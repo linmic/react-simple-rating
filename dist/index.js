@@ -104,7 +104,7 @@
           );
         });
 
-        var currentRatingWidthPercentage = this.state.rating && this.props.displayOnly ? this.state.rating / this.props.maxRating * 100 : 0;
+        var currentRatingWidthPercentage = this.props.rating && this.props.displayOnly ? this.props.rating / this.props.maxRating * 100 : 0;
         var ratingClassName = this.props.displayOnly ? 'rating display-only' : 'rating';
         var clickEventHandler = this.props.displayOnly ? null : this.handleClick.bind(this);
 
