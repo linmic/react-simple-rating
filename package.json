@@ -1,6 +1,6 @@
 {
   "name": "react-simple-rating",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "a pure and clean react component for your rating function",
   "main": "dist/index.js",
   "repository": {
