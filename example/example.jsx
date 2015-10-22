@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Rating from '../dist/index';
 
 let App = React.createClass({
@@ -34,4 +35,4 @@ let App = React.createClass({
   }
 });
 
-React.render(<App />, document.body);
+ReactDOM.render(<App />, document.getElementById('demo_container'));
