@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class Rating extends Component {
   static propTypes = {
-    onSubmit: React.PropTypes.func,
-    rating: React.PropTypes.number,
-    displayOnly: React.PropTypes.bool,
-    maxRating: React.PropTypes.number,
-    ratingSymbol: React.PropTypes.string,
+    onSubmit: PropTypes.func,
+    rating: PropTypes.number,
+    displayOnly: PropTypes.bool,
+    maxRating: PropTypes.number,
+    ratingSymbol: PropTypes.string,
   };
 
   static defaultProps = {
@@ -24,7 +24,7 @@ export default class Rating extends Component {
     };
   }
 
-  handleClick(e) {
+  handleClick = (e) => {
     e.preventDefault();
 
     const order = Math.abs(this.props.maxRating - e.target.getAttribute('data-order')) + 1;
@@ -36,7 +36,7 @@ export default class Rating extends Component {
     if (this.props.onSubmit) {
       this.props.onSubmit(order);
     }
-  }
+  };
 
   renderMask() {
     return Array.from(Array(this.props.maxRating).keys())
@@ -44,22 +44,27 @@ export default class Rating extends Component {
   }
 
   render() {
-    const symbols = Array.from(Array(this.props.maxRating).keys()).map(idx => {
+    const { rating } = this.state;
+    const {
+      maxRating,
+      ratingSymbol,
+      displayOnly,
+    } = this.props;
+
+    const symbols = Array.from({ length: maxRating }, (_, idx) => {
       const order = idx + 1;
       const symbolClassName = 
-        (Math.abs(this.props.maxRating - idx) === this.state.rating) ?
-        'active' : '';
+        (Math.abs(maxRating - idx) === rating) ? 'active' : '';
 
       return (
-        <i key={`rating_symbol_${idx}`} data-order={order} className={symbolClassName}>{this.props.ratingSymbol}</i>
+        <i key={`rating_symbol_${idx}`} data-order={order} className={symbolClassName}>{ratingSymbol}</i>
       );
     });
 
     const currentRatingWidthPercentage =
-      (this.props.rating && this.props.displayOnly) ?
-      this.props.rating / this.props.maxRating * 100 : 0;
-    const ratingClassName = this.props.displayOnly ? 'rating display-only' : 'rating';
-    const clickEventHandler = this.props.displayOnly ? null : this.handleClick.bind(this);
+      (rating && displayOnly) ? rating / maxRating * 100 : 0;
+    const ratingClassName = displayOnly ? 'rating display-only' : 'rating';
+    const clickEventHandler = displayOnly ? null : this.handleClick;
 
     return (
       <div className={ratingClassName} onClick={clickEventHandler}>

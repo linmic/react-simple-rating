@@ -26,6 +26,20 @@ var Rating = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Rating).call(this, props));
 
+    _this.handleClick = function (e) {
+      e.preventDefault();
+
+      var order = Math.abs(_this.props.maxRating - e.target.getAttribute('data-order')) + 1;
+
+      _this.setState({
+        rating: order
+      });
+
+      if (_this.props.onSubmit) {
+        _this.props.onSubmit(order);
+      }
+    };
+
     _this.state = {
       rating: props.rating
     };
@@ -33,21 +47,6 @@ var Rating = function (_Component) {
   }
 
   _createClass(Rating, [{
-    key: 'handleClick',
-    value: function handleClick(e) {
-      e.preventDefault();
-
-      var order = Math.abs(this.props.maxRating - e.target.getAttribute('data-order')) + 1;
-
-      this.setState({
-        rating: order
-      });
-
-      if (this.props.onSubmit) {
-        this.props.onSubmit(order);
-      }
-    }
-  }, {
     key: 'renderMask',
     value: function renderMask() {
       var _this2 = this;
@@ -63,22 +62,27 @@ var Rating = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var rating = this.state.rating;
+      var _props = this.props;
+      var maxRating = _props.maxRating;
+      var ratingSymbol = _props.ratingSymbol;
+      var displayOnly = _props.displayOnly;
 
-      var symbols = Array.from(Array(this.props.maxRating).keys()).map(function (idx) {
+
+      var symbols = Array.from({ length: maxRating }, function (_, idx) {
         var order = idx + 1;
-        var symbolClassName = Math.abs(_this3.props.maxRating - idx) === _this3.state.rating ? 'active' : '';
+        var symbolClassName = Math.abs(maxRating - idx) === rating ? 'active' : '';
 
         return _react2.default.createElement(
           'i',
           { key: 'rating_symbol_' + idx, 'data-order': order, className: symbolClassName },
-          _this3.props.ratingSymbol
+          ratingSymbol
         );
       });
 
-      var currentRatingWidthPercentage = this.props.rating && this.props.displayOnly ? this.props.rating / this.props.maxRating * 100 : 0;
-      var ratingClassName = this.props.displayOnly ? 'rating display-only' : 'rating';
-      var clickEventHandler = this.props.displayOnly ? null : this.handleClick.bind(this);
+      var currentRatingWidthPercentage = rating && displayOnly ? rating / maxRating * 100 : 0;
+      var ratingClassName = displayOnly ? 'rating display-only' : 'rating';
+      var clickEventHandler = displayOnly ? null : this.handleClick;
 
       return _react2.default.createElement(
         'div',
@@ -97,11 +101,11 @@ var Rating = function (_Component) {
 }(_react.Component);
 
 Rating.propTypes = {
-  onSubmit: _react2.default.PropTypes.func,
-  rating: _react2.default.PropTypes.number,
-  displayOnly: _react2.default.PropTypes.bool,
-  maxRating: _react2.default.PropTypes.number,
-  ratingSymbol: _react2.default.PropTypes.string
+  onSubmit: _react.PropTypes.func,
+  rating: _react.PropTypes.number,
+  displayOnly: _react.PropTypes.bool,
+  maxRating: _react.PropTypes.number,
+  ratingSymbol: _react.PropTypes.string
 };
 Rating.defaultProps = {
   rating: 0,
