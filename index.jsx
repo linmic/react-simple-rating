@@ -27,20 +27,26 @@ export default class Rating extends Component {
   handleClick = (e) => {
     e.preventDefault();
 
-    const order = Math.abs(this.props.maxRating - e.target.getAttribute('data-order')) + 1;
+    const {
+      maxRating,
+      onSubmit,
+    } = this.props;
+    const order = Math.abs(maxRating - e.target.getAttribute('data-order')) + 1;
 
-    this.setState({
-      rating: order,
-    });
+    this.setState({ rating: order });
 
-    if (this.props.onSubmit) {
-      this.props.onSubmit(order);
+    if (onSubmit) {
+      onSubmit(order);
     }
   };
 
   renderMask() {
-    return Array.from(Array(this.props.maxRating).keys())
-                .map(idx => <i key={`rating_symbol_mask_${idx}`}>{this.props.ratingSymbol}</i>);
+    const {
+      maxRating,
+      ratingSymbol,
+    } = this.props;
+
+    return Array.from({ length: maxRating }, (_, idx) => <i key={ idx }>{ ratingSymbol }</i>);
   }
 
   render() {
@@ -57,19 +63,18 @@ export default class Rating extends Component {
         (Math.abs(maxRating - idx) === rating) ? 'active' : '';
 
       return (
-        <i key={`rating_symbol_${idx}`} data-order={order} className={symbolClassName}>{ratingSymbol}</i>
+        <i key={ idx } data-order={ order } className={ symbolClassName }>{ ratingSymbol }</i>
       );
     });
 
-    const currentRatingWidthPercentage =
-      (rating && displayOnly) ? rating / maxRating * 100 : 0;
+    const currentRatingWidthPercentage = (rating && displayOnly) ? rating / maxRating * 100 : 0;
     const ratingClassName = displayOnly ? 'rating display-only' : 'rating';
     const clickEventHandler = displayOnly ? null : this.handleClick;
 
     return (
-      <div className={ratingClassName} onClick={clickEventHandler}>
+      <div className={ ratingClassName } onClick={ clickEventHandler }>
         {symbols}
-        <div className="current-rating" style={{width: `${currentRatingWidthPercentage}%`}}>
+        <div className="current-rating" style={{ width: `${currentRatingWidthPercentage}%` }}>
           {this.renderMask()}
         </div>
       </div>

@@ -29,14 +29,16 @@ var Rating = function (_Component) {
     _this.handleClick = function (e) {
       e.preventDefault();
 
-      var order = Math.abs(_this.props.maxRating - e.target.getAttribute('data-order')) + 1;
+      var _this$props = _this.props;
+      var maxRating = _this$props.maxRating;
+      var onSubmit = _this$props.onSubmit;
 
-      _this.setState({
-        rating: order
-      });
+      var order = Math.abs(maxRating - e.target.getAttribute('data-order')) + 1;
 
-      if (_this.props.onSubmit) {
-        _this.props.onSubmit(order);
+      _this.setState({ rating: order });
+
+      if (onSubmit) {
+        onSubmit(order);
       }
     };
 
@@ -49,13 +51,16 @@ var Rating = function (_Component) {
   _createClass(Rating, [{
     key: 'renderMask',
     value: function renderMask() {
-      var _this2 = this;
+      var _props = this.props;
+      var maxRating = _props.maxRating;
+      var ratingSymbol = _props.ratingSymbol;
 
-      return Array.from(Array(this.props.maxRating).keys()).map(function (idx) {
+
+      return Array.from({ length: maxRating }, function (_, idx) {
         return _react2.default.createElement(
           'i',
-          { key: 'rating_symbol_mask_' + idx },
-          _this2.props.ratingSymbol
+          { key: idx },
+          ratingSymbol
         );
       });
     }
@@ -63,10 +68,10 @@ var Rating = function (_Component) {
     key: 'render',
     value: function render() {
       var rating = this.state.rating;
-      var _props = this.props;
-      var maxRating = _props.maxRating;
-      var ratingSymbol = _props.ratingSymbol;
-      var displayOnly = _props.displayOnly;
+      var _props2 = this.props;
+      var maxRating = _props2.maxRating;
+      var ratingSymbol = _props2.ratingSymbol;
+      var displayOnly = _props2.displayOnly;
 
 
       var symbols = Array.from({ length: maxRating }, function (_, idx) {
@@ -75,7 +80,7 @@ var Rating = function (_Component) {
 
         return _react2.default.createElement(
           'i',
-          { key: 'rating_symbol_' + idx, 'data-order': order, className: symbolClassName },
+          { key: idx, 'data-order': order, className: symbolClassName },
           ratingSymbol
         );
       });
