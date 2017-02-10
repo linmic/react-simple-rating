@@ -2,6 +2,40 @@
  * heavily inspired by https://css-tricks.com/star-ratings/
  */
 
+body {
+  font: normal 21px/1.2 FontAwesome, Helvetica, sans-serif;
+}
+
+a {
+  color: #2980b9;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: normal;
+  font: 400 24px/1.5 -apple-system, 'Helvetica', 'Roboto', sans-serif;
+}
+
+h2 {
+  font: 300 20px/1.2 -apple-system, 'Helvetica', 'Roboto', sans-serif;
+}
+
+h2:not(:first-child) {
+  margin-top: 30px;
+}
+
+#demo_container {
+  width: 600px;
+  margin: 20px auto;
+  padding: 0 20px 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#demo {
+  font-size: 30px;
+}
+
 .rating {
   display: inline-block;
   position: relative;
