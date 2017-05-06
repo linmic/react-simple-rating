@@ -21,10 +21,13 @@
     "eslint-plugin-react": "^6.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "fbjs-scripts": "^0.7.1",
+    "husky": "^0.13.3",
+    "lint-staged": "^3.4.1",
     "postcss": "^5.0.10",
     "postcss-cli": "^2.2.0",
     "postcss-loader": "^0.9.1",
     "postcss-nested": "^1.0.0",
+    "prettier": "^1.3.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "style-loader": "^0.13.0",
@@ -35,7 +38,14 @@
     "dev": "webpack -w -d",
     "build-js": "babel index.jsx --out-dir=dist --modules umd --module-id Rating",
     "build-css": "postcss --use postcss-nested -o ./dist/rating.css rating.css && echo 'rating.css -> dist/rating.css'",
-    "build": "npm run build-js && npm run build-css"
+    "build": "npm run build-js && npm run build-css",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --single-quote --print-width 120 --trailing-comma es5 --write",
+      "git add"
+    ]
   },
   "keywords": [
     "react",
