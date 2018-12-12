@@ -17,6 +17,18 @@ let App = React.createClass({
     });
   },
 
+  handleMouseOver(rating) {
+    ////////// test //////
+    console.log('handleMouseOver rating', rating);
+    //////////////////////
+  },
+
+  handleMouseOut(rating) {
+    ////////// test //////
+    console.log('handleMouseOut rating', rating);
+    //////////////////////
+  },
+
   render() {
     return (
       <div id="demo">
@@ -25,6 +37,8 @@ let App = React.createClass({
         <Rating rating={3.43} displayOnly={true} />
         <h2>this is funtional with onSubmit</h2>
         <Rating displayOnly={false} onSubmit={this.handleClick} />
+        <h2>this is funtional with onMouseOver and onMouseOut</h2>
+        <Rating displayOnly={false} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut} />
         <h2>arbitrary maxRating</h2>
         <Rating displayOnly={false} maxRating={7} onSubmit={this.handleClick} />
         <h2>this demonstrates how to use your custom unicode symbols</h2>
