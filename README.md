@@ -27,7 +27,7 @@ npm run dev && open ./example/index.html
 
 #### functional
 ```jsx
-<Rating displayOnly={false} onSubmit={this.handleClick} />
+<Rating displayOnly={false} onSubmit={this.handleClick} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut} />
 ```
 
 #### arbitrary maxRating (but don't go too far)
