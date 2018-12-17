@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 export default class Rating extends Component {
   static propTypes = {
     onSubmit: PropTypes.func,
+    onMouseOver: PropTypes.func,
+    onMouseOut: PropTypes.func,
     rating: PropTypes.number,
     displayOnly: PropTypes.bool,
     maxRating: PropTypes.number,
@@ -40,6 +42,22 @@ export default class Rating extends Component {
     }
   };
 
+  handleMouseOver = (index) => {
+    const { onMouseOver } = this.props;
+
+    if (onMouseOver) {
+      onMouseOver(index);
+    }
+  };
+
+  handleMouseOut = (index) => {
+    const { onMouseOut } = this.props;
+
+    if (onMouseOut) {
+      onMouseOut(index);
+    }
+  };
+
   renderMask() {
     const {
       maxRating,
@@ -56,20 +74,18 @@ export default class Rating extends Component {
       ratingSymbol,
       displayOnly,
     } = this.props;
-
+    const currentRatingWidthPercentage = (rating && displayOnly) ? rating / maxRating * 100 : 0;
+    const ratingClassName = displayOnly ? 'rating display-only' : 'rating';
+    const clickEventHandler = displayOnly ? null : this.handleClick;
     const symbols = Array.from({ length: maxRating }, (_, idx) => {
       const order = idx + 1;
       const symbolClassName = 
         (Math.abs(maxRating - idx) === rating) ? 'active' : '';
 
       return (
-        <i key={ idx } data-order={ order } className={ symbolClassName }>{ ratingSymbol }</i>
+        <i key={ idx } data-order={ order } className={ symbolClassName } onMouseOver={ () => this.handleMouseOver(Math.abs(maxRating - idx)) } onMouseOut={ () => this.handleMouseOut(Math.abs(maxRating - idx)) }>{ ratingSymbol }</i>
       );
     });
-
-    const currentRatingWidthPercentage = (rating && displayOnly) ? rating / maxRating * 100 : 0;
-    const ratingClassName = displayOnly ? 'rating display-only' : 'rating';
-    const clickEventHandler = displayOnly ? null : this.handleClick;
 
     return (
       <div className={ ratingClassName } onClick={ clickEventHandler }>
